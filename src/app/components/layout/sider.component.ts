@@ -23,6 +23,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NzBreakpointKey, NzBreakpointService, siderResponsiveMap } from './core/services';
 
 @Component({
   selector: 'z-side',
