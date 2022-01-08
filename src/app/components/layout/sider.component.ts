@@ -1,7 +1,7 @@
 /*
  * @Author: zhangshaolong
  * @Date: 2021-12-25 15:24:58
- * @LastEditors: g05047
+ * @LastEditors: Please set LastEditors
  */
 import { Platform } from '@angular/cdk/platform';
 import {
@@ -23,7 +23,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NzBreakpointKey, NzBreakpointService, siderResponsiveMap } from './core/services';
+import { NzBreakpointKey, NzBreakpointService, siderResponsiveMap } from '..services/core/services';
 
 @Component({
   selector: 'z-side',

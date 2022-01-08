@@ -5,5 +5,6 @@
 import { MediaMatcher } from '@angular/cdk/layout'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 import { NzResizeService } from './resize';
