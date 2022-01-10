@@ -23,12 +23,17 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NzBreakpointKey, NzBreakpointService, siderResponsiveMap } from '..services/core/services';
+import { NzBreakpointKey, NzBreakpointService, siderResponsiveMap } from '../core/services';
+import { BooleanInput } from '../core/types';
+import { inNextTick, InputBoolean, toCssPixel } from '../core/util';
+// import { NzMenuDirective } from 'ng-zorro-antd/menu';-
 
 @Component({
   selector: 'z-side',
   exportAs: 'zSide',
   template: '<ng-content></ng-content>',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZSideComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit  {
   constructor(
