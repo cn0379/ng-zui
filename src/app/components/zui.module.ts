@@ -1,16 +1,16 @@
 /*
  * @Author: zhangshaolong
  * @Date: 2021-12-25 14:12:16
- * @LastEditors: g05047
+ * @LastEditors: Please set LastEditors
  */
 import { ModuleWithProviders , NgModule} from '@angular/core';
 import { ZLayoutModule  } from './layout'
-
-export * from './layout';
+import { ZMenuModule } from './menu'
 @NgModule({
   imports:[],
   exports:[
     ZLayoutModule,
+    ZMenuModule
   ]
 })
 

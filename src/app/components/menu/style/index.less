@@ -1,0 +1,39 @@
+@import '../../style/themes/index';
+
+@menu-prefix-cls: ~'@{z-prefix}-menu';
+
+.@{menu-prefix-cls} {
+
+
+  &&-root:focus-visible {
+  }
+
+  margin-bottom: 0;
+  padding-left: 0; // Override default ul/ol
+  line-height: 0; // Fix display inline-block gap
+  text-align: left;
+  list-style: none;
+  outline: none;
+
+  &-root&-vertical,
+  &-root&-vertical-left,
+  &-root&-vertical-right,
+  &-root&-inline {
+    box-shadow: none;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &-vertical {
+
+  }
+
+  &-inline {
+    width: 100%;
+  }
+}
