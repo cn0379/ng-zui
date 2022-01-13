@@ -1,11 +1,48 @@
-<div class="app-container">
+<!--
+ * @Author: zhangshaolong
+ * @Date: 2021-12-25 14:07:00
+-->
+<!-- <div class="app-container">
   <z-header>
     头部
   </z-header>
+  <z-side>
+    侧边
+  </z-side>
   <z-content>
     内容
   </z-content>
   <z-footer>
     底部
   </z-footer>
-</div>
+</div> -->
+<z-layout class="app-layout" >
+  <z-side>
+    <div class="sidebar-logo">
+      <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Ant Design Of Angular</h1>
+      </a>
+    </div>
+    <ul nz-menu >
+      <li nz-submenu >
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/welcome">Welcome</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Monitor</a>
+          </li>
+        </ul>
+      </li>
+      <li  nzTitle="Form" >
+        <ul>
+          <li nz-menu-item >
+            <a>Basic Form</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </z-side>
+</z-layout>
+

@@ -1,0 +1,31 @@
+@import "../../style/themes/index.less";
+
+@layout-prefix-cls: ~"@{ant-prefix}-layout";
+
+.@{layout-prefix-cls} {
+  display: flex;
+  flex: auto;
+  min-height: 0;
+
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
+
+  &-sider {
+    position: relative;
+    min-width: 0;
+    background: rgb(31, 28, 45);
+    transition: all 0.2s;
+
+    &-children {
+      height: 100%;
+      margin-top: -0.1px;
+      // Hack for fixing margin collaspe bug
+      // https://github.com/ant-design/ant-design/issues/7967
+      // solution from https://stackoverflow.com/a/33132624/3040605
+      padding-top: 0.1px;
+    }
+  }
+}

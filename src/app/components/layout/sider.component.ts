@@ -31,19 +31,58 @@ import { inNextTick, InputBoolean, toCssPixel } from '../core/util';
 @Component({
   selector: 'z-side',
   exportAs: 'zSide',
-  template: '<ng-content></ng-content>',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <div class="z-layout-sider-children" >
+      <ng-content></ng-content>
+    </div>
+  `,
+  host:{
+    class: 'z-layout-sider',
+    '[style.flex]': 'flexSetting',
+    '[style.maxWidth]': 'widthSetting',
+    '[style.minWidth]': 'widthSetting',
+    '[style.width]': 'widthSetting'
+  }
 })
 export class ZSideComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit  {
+
+  private destroy$ = new Subject();
+  @Output() readonly nzCollapsedChange = new EventEmitter();
+  @Input() nzWidth: string | number = 200;
+  @Input() nzTheme: 'light' | 'dark' = 'dark';
+  @Input() nzCollapsedWidth = 80;
+  @Input() nzBreakpoint: NzBreakpointKey | null = null;
+  @Input() @InputBoolean() nzReverseArrow = false;
+  @Input() @InputBoolean() nzCollapsible = false;
+  @Input() @InputBoolean() nzCollapsed = false;
+  matchBreakPoint = false;
+  flexSetting: string | null = null;
+  widthSetting: string | null = null;
+
   constructor(
     private platform: Platform,
+    private cdr: ChangeDetectorRef,
   ){
 
   }
+
+  updateStyleMap(): void {
+    this.widthSetting = this.nzCollapsed ? `${this.nzCollapsedWidth}px` : toCssPixel(this.nzWidth);
+    this.flexSetting = `0 0 ${this.widthSetting}`;
+    this.cdr.markForCheck();
+  }
+
+  updateMenuInlineCollapsed() :void {
+
+  }
+
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.updateStyleMap();
+
   }
 
   ngOnDestroy(): void {
@@ -51,7 +90,13 @@ export class ZSideComponent implements OnInit, OnDestroy, OnChanges, AfterConten
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    const { nzCollapsed, nzCollapsedWidth, nzWidth } = changes;
+    if (nzCollapsed || nzCollapsedWidth || nzWidth) {
+      this.updateStyleMap();
+    }
+    if (nzCollapsed) {
+      this.updateMenuInlineCollapsed();
+    }
   }
 
   ngAfterContentInit(): void {
