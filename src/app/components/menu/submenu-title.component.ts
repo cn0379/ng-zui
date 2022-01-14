@@ -86,7 +86,6 @@ export class ZSubMenuTitleComponent implements OnDestroy, OnInit {
   }
 
   setMouseState(state: boolean): void {
-    console.log('setMouseState');
     if (!this.nzDisabled) {
       this.subMenuMouseState.next(state);
     }

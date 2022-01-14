@@ -82,10 +82,23 @@ import {  MenuService } from './menu.service'
     </ng-template>
   `,
   host: {
+    '[class.z-dropdown-menu-submenu]': `isMenuInsideDropDown`,
+    '[class.z-dropdown-menu-submenu-disabled]': `isMenuInsideDropDown && nzDisabled`,
+    '[class.z-dropdown-menu-submenu-open]': `isMenuInsideDropDown && nzOpen`,
+    '[class.z-dropdown-menu-submenu-selected]': `isMenuInsideDropDown && isSelected`,
+    '[class.z-dropdown-menu-submenu-vertical]': `isMenuInsideDropDown && mode === 'vertical'`,
+    '[class.z-dropdown-menu-submenu-horizontal]': `isMenuInsideDropDown && mode === 'horizontal'`,
+    '[class.z-dropdown-menu-submenu-inline]': `isMenuInsideDropDown && mode === 'inline'`,
+    '[class.z-dropdown-menu-submenu-active]': `isMenuInsideDropDown && isActive`,
     '[class.z-menu-submenu]': `!isMenuInsideDropDown`,
-    '[class.z-menu-submenu-active]': `!isMenuInsideDropDown && isActive`,
-    '[class.z-menu-submenu-inline]': `!isMenuInsideDropDown && mode === 'inline'`,
+    '[class.z-menu-submenu-disabled]': `!isMenuInsideDropDown && nzDisabled`,
+    '[class.z-menu-submenu-open]': `!isMenuInsideDropDown && nzOpen`,
+    '[class.z-menu-submenu-selected]': `!isMenuInsideDropDown && isSelected`,
     '[class.z-menu-submenu-vertical]': `!isMenuInsideDropDown && mode === 'vertical'`,
+    '[class.z-menu-submenu-horizontal]': `!isMenuInsideDropDown && mode === 'horizontal'`,
+    '[class.z-menu-submenu-inline]': `!isMenuInsideDropDown && mode === 'inline'`,
+    '[class.z-menu-submenu-active]': `!isMenuInsideDropDown && isActive`,
+    '[class.z-menu-submenu-rtl]': `dir === 'rtl'`
   },
 })
 export class ZSubMenuComponent
@@ -161,7 +174,6 @@ export class ZSubMenuComponent
     });
   }
 
-  ngOnDestroy(): void {}
 
   ngAfterContentInit(): void {
     const listOfNzMenuItemDirective = this.listOfNzMenuItemDirective;
@@ -184,6 +196,13 @@ export class ZSubMenuComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    const { nzOpen } = changes;
+    if (nzOpen) {
+      this.zSubmenuService.setOpenStateWithoutDebounce(this.nzOpen);
+    }
+  }
+
+  ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }

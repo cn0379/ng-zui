@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { collapseMotion } from '../core/animation';
 
 import { ZSafeAny } from '../core/types';
 
@@ -26,12 +27,14 @@ import { ZMenuModeType } from './menu.types';
 
 @Component({
   selector: '[z-submenu-inline-child]',
+  animations: [collapseMotion],
   exportAs: 'zSubmenuInlineChild',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: ` <ng-template [ngTemplateOutlet]="templateOutlet"></ng-template> `,
   host: {
     class: 'z-menu z-menu-inline z-menu-sub',
+    '[@collapseMotion]': 'expandState'
   },
 })
 export class ZSubmenuInlineChildComponent

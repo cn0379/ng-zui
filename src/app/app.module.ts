@@ -1,20 +1,21 @@
 /*
  * @Author: zhangshaolong
  * @Date: 2021-12-25 10:14:13
- * @LastEditors: g05047
+ * @LastEditors: Please set LastEditors
  */
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ZUIModule } from './components'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ZUIModule.forRoot()
   ],

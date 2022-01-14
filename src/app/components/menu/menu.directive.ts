@@ -6,7 +6,7 @@ import { Direction, Directionality } from '@angular/cdk/bidi';
 import {
   AfterContentInit,
   ChangeDetectorRef,
-  ContentChildren, // 需了解
+  ContentChildren,
   Directive,
   EventEmitter,
   Inject,
@@ -64,10 +64,23 @@ export function MenuDropDownTokenFactory(isMenuInsideDropDownToken: boolean): bo
     }
   ],
   host: {
+    '[class.z-dropdown-menu]': `isMenuInsideDropDown`,
+    '[class.z-dropdown-menu-root]': `isMenuInsideDropDown`,
+    '[class.z-dropdown-menu-light]': `isMenuInsideDropDown && nzTheme === 'light'`,
+    '[class.z-dropdown-menu-dark]': `isMenuInsideDropDown && nzTheme === 'dark'`,
+    '[class.z-dropdown-menu-vertical]': `isMenuInsideDropDown && actualMode === 'vertical'`,
+    '[class.z-dropdown-menu-horizontal]': `isMenuInsideDropDown && actualMode === 'horizontal'`,
+    '[class.z-dropdown-menu-inline]': `isMenuInsideDropDown && actualMode === 'inline'`,
+    '[class.z-dropdown-menu-inline-collapsed]': `isMenuInsideDropDown && nzInlineCollapsed`,
     '[class.z-menu]': `!isMenuInsideDropDown`,
     '[class.z-menu-root]': `!isMenuInsideDropDown`,
+    '[class.z-menu-light]': `!isMenuInsideDropDown && nzTheme === 'light'`,
+    '[class.z-menu-dark]': `!isMenuInsideDropDown && nzTheme === 'dark'`,
     '[class.z-menu-vertical]': `!isMenuInsideDropDown && actualMode === 'vertical'`,
+    '[class.z-menu-horizontal]': `!isMenuInsideDropDown && actualMode === 'horizontal'`,
     '[class.z-menu-inline]': `!isMenuInsideDropDown && actualMode === 'inline'`,
+    '[class.z-menu-inline-collapsed]': `!isMenuInsideDropDown && nzInlineCollapsed`,
+    '[class.z-menu-rtl]': `dir === 'rtl'`
   }
 })
 
@@ -91,7 +104,15 @@ export class ZMenuDirective implements AfterContentInit, OnInit, OnChanges, OnDe
   private listOfOpenedNzSubMenuComponent: ZSubMenuComponent[] = [];
 
   updateInlineCollapse():void {
-
+    if(this.listOfNzMenuItemDirective) {
+      if (this.zInlineCollapsed) {
+        this.listOfOpenedNzSubMenuComponent = this.listOfNzSubMenuComponent.filter(submenu => submenu.nzOpen);
+        this.listOfNzSubMenuComponent.forEach(submenu => submenu.setOpenStateWithoutDebounce(false));
+      } else {
+        this.listOfOpenedNzSubMenuComponent.forEach(submenu => submenu.setOpenStateWithoutDebounce(true));
+        this.listOfOpenedNzSubMenuComponent = [];
+      }
+    }
   }
 
 
@@ -113,7 +134,10 @@ export class ZMenuDirective implements AfterContentInit, OnInit, OnChanges, OnDe
     });
 
     this.zMenuService.descendantMenuItemClick$.pipe(takeUntil(this.destroy$)).subscribe(menu => {
-
+      this.nzClick.emit(menu);
+      if (this.zSelectable && !menu.nzMatchRouter) {
+        this.listOfNzMenuItemDirective.forEach(item => item.setSelectedState(item === menu));
+      }
     });
 
     this.dir = this.directionality.value;
