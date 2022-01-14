@@ -16,7 +16,7 @@
     底部
   </z-footer>
 </div> -->
-<z-layout class="app-layout" >
+<z-layout class="app-layout">
   <z-side>
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
@@ -24,25 +24,17 @@
         <h1>Ant Design Of Angular</h1>
       </a>
     </div>
-    <ul z-menu >
-      <!-- <li nz-submenu >
+    <ul z-menu nzMode="inline"  >
+      <li z-submenu zTitle="Dashboard" >
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
-          </li>
-        </ul>
-      </li>
-      <li  nzTitle="Form" >
-        <ul>
-          <li nz-menu-item >
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li> -->
+           <li z-menu-item >
+             <a>Welcome</a>
+           </li>
+           <li z-menu-item>
+             <a>Monitor</a>
+           </li>
+         </ul>
+       </li>
     </ul>
   </z-side>
 </z-layout>
-

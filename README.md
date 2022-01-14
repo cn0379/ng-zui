@@ -10,3 +10,8 @@ InjectionToken
 依赖注入 似懂非懂
 
 为什么要在counstrue 中注入依赖
+Direction, Directionality 
+
+animations
+
+

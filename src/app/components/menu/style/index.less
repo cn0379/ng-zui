@@ -1,12 +1,8 @@
-@import '../../style/themes/index';
+@import "../../style/themes/index";
 
-@menu-prefix-cls: ~'@{z-prefix}-menu';
+@menu-prefix-cls: ~"@{z-prefix}-menu";
 
 .@{menu-prefix-cls} {
-
-
-  &&-root:focus-visible {
-  }
 
   margin-bottom: 0;
   padding-left: 0; // Override default ul/ol
@@ -14,12 +10,21 @@
   text-align: left;
   list-style: none;
   outline: none;
+  background: #fff;
 
   &-root&-vertical,
   &-root&-vertical-left,
   &-root&-vertical-right,
   &-root&-inline {
     box-shadow: none;
+
+    .@{menu-prefix-cls}-item,
+    .@{menu-prefix-cls}-submenu-title {
+      height: 40px;
+      padding: 0 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   ul,
@@ -29,11 +34,90 @@
     list-style: none;
   }
 
-  &-vertical {
+  &-overflow {
+    display: flex;
 
+    &-item {
+      flex: none;
+    }
+  }
+
+  &-hidden,
+  &-submenu-hidden {
+    display: none;
+  }
+
+  &-submenu-selected {
+    color: red;
+  }
+
+  &-item:active,
+  &-submenu-title:active {
+    background: green;
+  }
+
+  &-submenu &-sub {
+    cursor: initial;
   }
 
   &-inline {
     width: 100%;
+  }
+
+  &-horizontal &-item,
+  &-horizontal &-submenu {
+    margin-top: -1px;
+  }
+
+  &-horizontal > &-item:hover,
+  &-horizontal > &-item-active,
+  &-horizontal > &-submenu &-submenu-title:hover {
+    background-color: transparent;
+  }
+
+  &-item,
+  &-submenu-title {
+    position: relative;
+    display: block;
+    margin: 0;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  &-submenu {
+    > .@{menu-prefix-cls} {
+      background-color: red;
+      border-radius: 2;
+    }
+
+    &-arrow {
+      // →
+      &::before,
+      &::after {
+        position: absolute;
+        width: 6px;
+        height: 1.5px;
+        background-color: currentColor;
+        border-radius: 2px;
+        content: "";
+      }
+
+      &::before {
+        transform: rotate(45deg) translateY(-2.5px);
+      }
+
+      &::after {
+        transform: rotate(-45deg) translateY(2.5px);
+      }
+    }
+  }
+
+  &-item-selected {
+    color: blueviolet;
+
+    a,
+    a:hover {
+      color: red;
+    }
   }
 }
