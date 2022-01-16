@@ -3,24 +3,24 @@
  * @Date: 2022-01-09 17:30:06
  */
 import { coerceBooleanProperty, coerceCssPixelValue, _isNumberValue } from '@angular/cdk/coercion';
-import { FunctionProp, NzSafeAny } from '../types';
+import { FunctionProp, ZSafeAny } from '../types';
 
 export function toBoolean(value: boolean | string): boolean {
   return coerceBooleanProperty(value);
 }
-export function valueFunctionProp<T>(prop: FunctionProp<T> | T, ...args: NzSafeAny[]): T {
+export function valueFunctionProp<T>(prop: FunctionProp<T> | T, ...args: ZSafeAny[]): T {
   return typeof prop === 'function' ? (prop as FunctionProp<T>)(...args) : prop;
 }
 
 function propDecoratorFactory<T, D>(
   name: string,
   fallback: (v: T) => D
-): (target: NzSafeAny, propName: string) => void {
+): (target: ZSafeAny, propName: string) => void {
   function propDecorator(
-    target: NzSafeAny,
+    target: ZSafeAny,
     propName: string,
-    originalDescriptor?: TypedPropertyDescriptor<NzSafeAny>
-  ): NzSafeAny {
+    originalDescriptor?: TypedPropertyDescriptor<ZSafeAny>
+  ): ZSafeAny {
     const privatePropName = `$$__zorroPropDecorator__${propName}`;
 
     if (Object.prototype.hasOwnProperty.call(target, privatePropName)) {
@@ -50,7 +50,7 @@ function propDecoratorFactory<T, D>(
   return propDecorator;
 }
 
-export function InputBoolean(): NzSafeAny {
+export function InputBoolean(): ZSafeAny {
   return propDecoratorFactory('InputBoolean', toBoolean);
 }
 
