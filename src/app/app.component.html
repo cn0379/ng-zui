@@ -1,21 +1,4 @@
-<!--
- * @Author: zhangshaolong
- * @Date: 2021-12-25 14:07:00
--->
-<!-- <div class="app-container">
-  <z-header>
-    头部
-  </z-header>
-  <z-side>
-    侧边
-  </z-side>
-  <z-content>
-    内容
-  </z-content>
-  <z-footer>
-    底部
-  </z-footer>
-</div> -->
+
 <z-layout class="app-layout">
   <z-side>
     <div class="sidebar-logo">
@@ -24,17 +7,32 @@
         <h1>Ant Design Of Angular</h1>
       </a>
     </div>
-    <ul z-menu nzMode="inline"  >
-      <li z-submenu zTitle="Dashboard" >
+    <ul z-menu (nzClick)="nzClick1()" nzMode="inline"  >
+      <li z-menu-item zMatchRouter>
+        <a >
+          <span *ngIf="language === 'en'">Components Overview</span>
+          <span *ngIf="language === 'zh'">组件总览</span>
+        </a>
+      </li>
+
+      <li z-menu-group *ngFor="let group of sideMenuList.components" [hidden]="group.language !== language" [zTitle]="group.name">
         <ul>
-           <li z-menu-item >
-             <a>Welcome</a>
-           </li>
-           <li z-menu-item>
-             <a>Monitor</a>
-           </li>
-         </ul>
-       </li>
+          <ng-container>
+            <li z-menu-item nzMatchRouter *ngFor="let component of group.children">
+              <a routerLink="{{ component.path }}">
+                <span>{{ component.label }}</span>
+                <span class="chinese">{{ component.zh }}</span>
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </li>
     </ul>
   </z-side>
+  <z-layout>
+    <z-header>
+      <div class="app-header">
+      </div>
+    </z-header>
+  </z-layout>
 </z-layout>

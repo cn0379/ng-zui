@@ -15,3 +15,30 @@ Direction, Directionality
 animations
 
 
+___________________________________________________
+指令 zmenu
+
+zmenu文件做的事情 主要负责方向的处理
+
+z-submenu文件做的事情是 子菜单模块的展示(作为menu的子级)
+
+z-submenu-title (submenu 的子级) 点击的逻辑层还是在 submenu处理
+
+z-submenu-inlin-title 做的是动画的展开与收起
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

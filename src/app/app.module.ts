@@ -9,6 +9,8 @@ import { ZUIModule } from './components'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { FixedWidgetsComponent } from './@shared/fixed-widgets/fixed-widgets.component'
+
 @NgModule({
   declarations: [
     AppComponent

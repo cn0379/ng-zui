@@ -15,7 +15,7 @@ import { ZSubMenuComponent } from './submenu.component';
 import { ZSubMenuTitleComponent } from './submenu-title.component';
 import { ZMenuItemDirective } from './menu-item.directive';
 import { ZSubmenuInlineChildComponent } from './submenu-inline-child.component';
-
+import { ZMenuGroupComponent } from './menu-group.component'
 @NgModule({
   imports: [
     BidiModule,
@@ -30,12 +30,14 @@ import { ZSubmenuInlineChildComponent } from './submenu-inline-child.component';
     ZSubMenuTitleComponent,
     ZMenuItemDirective,
     ZSubmenuInlineChildComponent,
+    ZMenuGroupComponent
   ],
   exports: [
     ZMenuDirective,
     ZMenuItemDirective,
     ZSubMenuComponent,
     ZSubmenuInlineChildComponent,
+    ZMenuGroupComponent
   ],
 })
 export class ZMenuModule {}

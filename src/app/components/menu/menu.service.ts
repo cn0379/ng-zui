@@ -28,8 +28,6 @@ export class MenuService {
   }
 
   setMode(mode: ZMenuModeType): void {
-    console.log('---',mode);
-
     this.mode$.next(mode);
   }
 
