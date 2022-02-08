@@ -15,10 +15,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
         style="width: 44px; height: 44px; line-height: 44px; font-size: 22px;"
         nz-dropdown
         nzPlacement="topCenter"
-        [nzDropdownMenu]="menu"
+        [zDropdownMenu]="menu"
       >
         <theming-icon></theming-icon>
-        <nz-dropdown-menu #menu="nzDropdownMenu">
+        <nz-dropdown-menu #menu="zDropdownMenu">
           <ul nz-menu nzSelectable>
             <li nz-menu-item (click)="onThemeChange('default')">{{ language === 'zh' ? '默认主题' : 'Default' }}</li>
             <li nz-menu-item (click)="onThemeChange('dark')">{{ language === 'zh' ? '暗黑主题' : 'Dark Theme' }}</li>

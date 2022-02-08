@@ -1,3 +1,7 @@
+<!--
+ * @Author: zhangshaolong
+ * @Date: 2022-01-14 22:17:44
+-->
 
 <z-layout class="app-layout">
   <z-side>
@@ -7,15 +11,16 @@
         <h1>Ant Design Of Angular</h1>
       </a>
     </div>
-    <ul z-menu (nzClick)="nzClick1()" nzMode="inline"  >
+    <ul z-menu (nzClick)="nzClick1()" nzMode="inline">
       <li z-menu-item zMatchRouter>
-        <a >
+        <a>
           <span *ngIf="language === 'en'">Components Overview</span>
           <span *ngIf="language === 'zh'">组件总览</span>
         </a>
       </li>
 
-      <li z-menu-group *ngFor="let group of sideMenuList.components" [hidden]="group.language !== language" [zTitle]="group.name">
+      <li z-menu-group *ngFor="let group of sideMenuList.components" [hidden]="group.language !== language"
+        [zTitle]="group.name">
         <ul>
           <ng-container>
             <li z-menu-item nzMatchRouter *ngFor="let component of group.children">
@@ -32,7 +37,11 @@
   <z-layout>
     <z-header>
       <div class="app-header">
+
       </div>
     </z-header>
   </z-layout>
+  <button z-button nzType="primary">Primary Button</button>
+  <button z-button nzType="primary" nzDanger>Primary</button>
+
 </z-layout>

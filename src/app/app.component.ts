@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   }
 
   zOpenChange() {
-    console.log(99999);
 
   }
 

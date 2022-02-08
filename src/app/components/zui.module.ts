@@ -6,11 +6,13 @@
 import { ModuleWithProviders , NgModule} from '@angular/core';
 import { ZLayoutModule  } from './layout'
 import { ZMenuModule } from './menu'
+import { ZButtonModule  } from './button'
 @NgModule({
   imports:[],
   exports:[
     ZLayoutModule,
-    ZMenuModule
+    ZMenuModule,
+    ZButtonModule
   ]
 })
 
