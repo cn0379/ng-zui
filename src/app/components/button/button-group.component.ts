@@ -19,8 +19,8 @@ export type NzButtonGroupSize = 'large' | 'default' | 'small';
 
 
 @Component({
-  selector: 'nz-button-group',
-  exportAs: 'nzButtonGroup',
+  selector: 'z-button-group',
+  exportAs: 'zButtonGroup',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {

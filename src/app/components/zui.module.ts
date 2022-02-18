@@ -7,12 +7,14 @@ import { ModuleWithProviders , NgModule} from '@angular/core';
 import { ZLayoutModule  } from './layout'
 import { ZMenuModule } from './menu'
 import { ZButtonModule  } from './button'
+import { ZDropDownModule  } from './dropdown'
 @NgModule({
   imports:[],
   exports:[
     ZLayoutModule,
     ZMenuModule,
-    ZButtonModule
+    ZButtonModule,
+    ZDropDownModule
   ]
 })
 

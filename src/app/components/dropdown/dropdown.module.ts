@@ -9,13 +9,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ZButtonModule } from '../button';
 import { ZNoAnimationModule } from '../core/no-animation';
 import { ZOutletModule } from '../core/outlet';
 import { ZOverlayModule } from '../core/overlay';
 import { ZMenuModule } from '../menu';
 
+import { ZContextMenuServiceModule } from './context-menu.service.module';
+import { ZDropDownADirective } from './dropdown-a.directive';
 import { ZDropdownMenuComponent } from './dropdown-menu.component';
 import { ZDropDownDirective } from './dropdown.directive';
+import { ZDropdownButtonDirective } from './dropdown-button.directive';
 
 
 @NgModule({
@@ -28,10 +32,12 @@ import { ZDropDownDirective } from './dropdown.directive';
     ZNoAnimationModule,
     PlatformModule,
     ZOverlayModule,
+    ZButtonModule,
+    ZContextMenuServiceModule,
     ZOutletModule
   ],
   entryComponents: [ZDropdownMenuComponent],
-  declarations: [ ZDropDownDirective, ZDropdownMenuComponent, ],
-  exports: [ZMenuModule, ZDropdownMenuComponent,ZDropDownDirective]
+  declarations: [ ZDropDownDirective, ZDropdownMenuComponent, ZDropDownADirective,ZDropdownButtonDirective],
+  exports: [ZMenuModule, ZDropdownMenuComponent,ZDropDownDirective,ZDropDownADirective,ZDropdownButtonDirective]
 })
-export class NzDropDownModule {}
+export class ZDropDownModule {}

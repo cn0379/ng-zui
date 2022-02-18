@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 
 import { FixedWidgetsComponent } from './fixed-widgets.component';
 import { ThemingIcon } from './theme-icons'
+import { ZDropDownModule } from '../../components/dropdown';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ThemingIcon } from './theme-icons'
   ],
   imports: [
     CommonModule,
+    ZDropDownModule
   ],
   exports: [FixedWidgetsComponent]
 })

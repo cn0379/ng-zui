@@ -89,6 +89,7 @@ export class ZMenuItemDirective
 
   constructor(
     private zMenuService: MenuService,
+    @Inject(ZIsMenuInsideDropDownToken) public isMenuInsideDropDown: boolean,
     @Optional() private zSubmenuService: ZSubmenuService,
     @Optional() private directionality: Directionality
   ) {}

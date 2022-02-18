@@ -89,6 +89,7 @@ export class ZButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Af
 
   insertSpan(nodes: NodeList, renderer: Renderer2): void {
     nodes.forEach(node => {
+      console.log(node.nodeName)
       if (node.nodeName === '#text') {
         const span = renderer.createElement('span');
         const parent = renderer.parentNode(node);
@@ -157,6 +158,7 @@ export class ZButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Af
   }
 
   ngAfterViewInit(): void {
+
     this.assertIconOnly(this.elementRef.nativeElement, this.renderer);
     this.insertSpan(this.elementRef.nativeElement.childNodes, this.renderer);
   }

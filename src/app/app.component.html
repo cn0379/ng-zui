@@ -36,12 +36,12 @@
   </z-side>
   <z-layout>
     <z-header>
-      <div class="app-header">
 
-      </div>
+      <app-fixed-widgets
+      [theme]="theme"
+      (themeChange)="onThemeChange($event)"
+      [language]="language"
+    ></app-fixed-widgets>
     </z-header>
   </z-layout>
-  <button z-button nzType="primary">Primary Button</button>
-  <button z-button nzType="primary" nzDanger>Primary</button>
-
 </z-layout>

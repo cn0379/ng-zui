@@ -76,6 +76,7 @@ export class ZWaveRenderer {
 
   private fadeOutWave(): void {
     const node = this.triggerElement;
+
     const waveColor = this.getWaveColor(node);
     node.setAttribute(this.waveAttributeName, 'true');
     if (Date.now() < this.lastTime + this.waveTransitionDuration) {

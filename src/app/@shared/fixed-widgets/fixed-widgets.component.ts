@@ -2,33 +2,54 @@
  * @Author: zhangshaolong
  * @Date: 2022-01-27 17:36:11
  */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-
-
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 @Component({
   selector: 'app-fixed-widgets',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="fixed-widgets">
+    <div
+      style="
+    position: fixed;
+    right: 32px;
+    bottom: 102px;
+    z-index: 2147483640;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;"
+      class="fixed-widgets"
+    >
       <div
-        class="ant-avatar ant-avatar-circle ant-avatar-icon fixed-widgets-avatar"
+        class="z-avatar z-avatar-circle z-avatar-icon fixed-widgets-avatar"
         style="width: 44px; height: 44px; line-height: 44px; font-size: 22px;"
-        nz-dropdown
-        nzPlacement="topCenter"
+        z-dropdown
         [zDropdownMenu]="menu"
       >
         <theming-icon></theming-icon>
-        <nz-dropdown-menu #menu="zDropdownMenu">
-          <ul nz-menu nzSelectable>
-            <li nz-menu-item (click)="onThemeChange('default')">{{ language === 'zh' ? '默认主题' : 'Default' }}</li>
-            <li nz-menu-item (click)="onThemeChange('dark')">{{ language === 'zh' ? '暗黑主题' : 'Dark Theme' }}</li>
-            <li nz-menu-item (click)="onThemeChange('compact')">{{ language === 'zh' ? '紧凑主题' : 'Compact Theme' }}</li>
-            <li nz-menu-item (click)="onThemeChange('aliyun')">{{ language === 'zh' ? '阿里云主题' : 'Aliyun Theme' }}</li>
+        <z-dropdown-menu #menu="zDropdownMenu">
+          <ul z-menu nzSelectable>
+            <li z-menu-item (click)="onThemeChange('default')">
+              {{ language === 'zh' ? '默认主题' : 'Default' }}
+            </li>
+            <li z-menu-item (click)="onThemeChange('dark')">
+              {{ language === 'zh' ? '暗黑主题' : 'Dark Theme' }}
+            </li>
+            <li z-menu-item (click)="onThemeChange('compact')">
+              {{ language === 'zh' ? '紧凑主题' : 'Compact Theme' }}
+            </li>
+            <li z-menu-item (click)="onThemeChange('aliyun')">
+              {{ language === 'zh' ? '阿里云主题' : 'Aliyun Theme' }}
+            </li>
           </ul>
-        </nz-dropdown-menu>
+        </z-dropdown-menu>
       </div>
     </div>
-  `
+  `,
 })
 export class FixedWidgetsComponent {
   compact = false;

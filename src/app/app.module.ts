@@ -9,17 +9,20 @@ import { ZUIModule } from './components'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { FixedWidgetsComponent } from './@shared/fixed-widgets/fixed-widgets.component'
+import { FixedWidgetsModule } from './@shared/fixed-widgets/fixed-widgets.modules';
+import {  HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ZUIModule.forRoot()
+    ZUIModule.forRoot(),
+    HttpClientModule,
+    FixedWidgetsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

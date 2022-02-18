@@ -104,7 +104,7 @@ export class ZMenuDirective
   @Input() nzInlineIndent = 24;
   @Input() nzMode: ZMenuModeType = 'vertical';
   @Input() @InputBoolean() zInlineCollapsed = false;
-  @Input() @InputBoolean() zSelectable = !this.isMenuInsideDropDown;
+  @Input() @InputBoolean() nzSelectable = !this.isMenuInsideDropDown;
   @Output() readonly nzClick = new EventEmitter<ZMenuItemDirective>();
   actualMode: ZMenuModeType = 'vertical';
   dir: Direction = 'ltr';
@@ -154,7 +154,7 @@ export class ZMenuDirective
       .pipe(takeUntil(this.destroy$))
       .subscribe((menu) => {
         this.nzClick.emit(menu);
-        if (this.zSelectable && !menu.nzMatchRouter) {
+        if (this.nzSelectable && !menu.nzMatchRouter) {
           this.listOfNzMenuItemDirective.forEach((item) => {
             item.setSelectedState(item === menu);
           });

@@ -23,6 +23,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
 import { slideMotion } from '../core/animation';
 import { ZNoAnimationDirective } from '../core/no-animation';
 import { IndexableObject, ZSafeAny } from '../core/types';
@@ -99,6 +100,7 @@ export class ZDropdownMenuComponent implements AfterContentInit, OnDestroy, OnIn
     @Host() @Optional() public noAnimation?: ZNoAnimationDirective
   ) {}
   ngOnInit(): void {
+    console.log(4444)
     this.directionality.change?.pipe(takeUntil(this.destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
       this.cdr.detectChanges();
