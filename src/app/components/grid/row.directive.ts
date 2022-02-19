@@ -53,7 +53,7 @@ export class NzRowDirective implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   dir: Direction = 'ltr';
 
-  private readonly destroy$ = new Subject();
+  private readonly  $ = new Subject();
 
   getGutter(): [number | null, number | null] {
     const results: [number | null, number | null] = [null, null];
