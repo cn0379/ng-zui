@@ -9,9 +9,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 
+import { NzColDirective } from './col.directive';
+import { NzRowDirective } from './row.directive';
+
 @NgModule({
-  declarations: [],
-  exports: [],
+  declarations: [NzColDirective, NzRowDirective],
+  exports: [NzColDirective, NzRowDirective],
   imports: [BidiModule, CommonModule, LayoutModule, PlatformModule]
 })
-export class NzGridModule {}
+export class ZGridModule {}

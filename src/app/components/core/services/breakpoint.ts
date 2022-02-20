@@ -4,8 +4,8 @@
  */
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { Observable,Subject } from 'rxjs';
+import { distinctUntilChanged, map, startWith,takeUntil } from 'rxjs/operators';
 
 import { ZResizeService } from './resize';
 
@@ -44,13 +44,22 @@ export const siderResponsiveMap: BreakpointMap = {
   providedIn: 'root',
 })
 export class NzBreakpointService {
+  private destroy$ = new Subject<void>();
+
   constructor(
     private resizeService: ZResizeService,
     private mediaMatcher: MediaMatcher
   ) {
-    this.resizeService.subscribe().subscribe(() => {
+    this.resizeService
+    .subscribe()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => {
       console.log('complate');
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   subscribe(breakpointMap: BreakpointMap): Observable<NzBreakpointEnum>;
@@ -77,6 +86,7 @@ export class NzBreakpointService {
         map((x) => x[1])
       );
     } else {
+      console.log('matchMedia2')
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       const get = () => this.matchMedia(breakpointMap);
       return this.resizeService

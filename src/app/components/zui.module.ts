@@ -8,13 +8,15 @@ import { ZLayoutModule  } from './layout'
 import { ZMenuModule } from './menu'
 import { ZButtonModule  } from './button'
 import { ZDropDownModule  } from './dropdown'
+import { ZGridModule } from './grid'
 @NgModule({
   imports:[],
   exports:[
     ZLayoutModule,
     ZMenuModule,
     ZButtonModule,
-    ZDropDownModule
+    ZDropDownModule,
+    ZGridModule
   ]
 })
 

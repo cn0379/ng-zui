@@ -53,18 +53,25 @@ export class NzRowDirective implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   dir: Direction = 'ltr';
 
-  private readonly  $ = new Subject();
+  private readonly destroy$ = new Subject();
 
   getGutter(): [number | null, number | null] {
     const results: [number | null, number | null] = [null, null];
     const gutter = this.nzGutter || 0;
     const normalizedGutter = Array.isArray(gutter) ? gutter : [gutter, null];
+    console.log('gutter',normalizedGutter)
+
     normalizedGutter.forEach((g, index) => {
       if (typeof g === 'object' && g !== null) {
         results[index] = null;
         Object.keys(gridResponsiveMap).map((screen: string) => {
           const bp = screen as NzBreakpointKey;
+          console.log(gridResponsiveMap[bp])
+          console.log('this.mediaMatcher.matchMedia(gridResponsiveMap[bp])',this.mediaMatcher.matchMedia(gridResponsiveMap[bp]))
+          console.log('this.mediaMatcher.matchMedia(gridResponsiveMap[bp]).matches',this.mediaMatcher.matchMedia(gridResponsiveMap[bp]).matches)
+
           if (this.mediaMatcher.matchMedia(gridResponsiveMap[bp]).matches && g[bp]) {
+            console.log('g[bp]',g[bp])
             results[index] = g![bp] as number;
           }
         });
@@ -105,18 +112,21 @@ export class NzRowDirective implements OnInit, OnChanges, AfterViewInit, OnDestr
     this.directionality.change?.pipe(takeUntil(this.destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
     });
-
+    console.log('init')
     this.setGutterStyle();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.nzGutter) {
+      console.log('changes.nzGutter',changes.nzGutter)
       this.setGutterStyle();
     }
   }
 
   ngAfterViewInit(): void {
     if (this.platform.isBrowser) {
+      console.log('mounted');
+      console.log('gridResponsiveMap',gridResponsiveMap)
       this.breakpointService
         .subscribe(gridResponsiveMap)
         .pipe(takeUntil(this.destroy$))
