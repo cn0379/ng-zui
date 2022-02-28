@@ -115,10 +115,10 @@ export class ZButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Af
     private elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
     private renderer: Renderer2,
-    public nzConfigService: ZConfigService,
+    public zConfigService: ZConfigService,
     @Optional() private directionality: Directionality
   ) {
-    this.nzConfigService
+    this.zConfigService
       .getConfigChangeEventForComponent(NZ_CONFIG_MODULE_NAME)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
@@ -151,6 +151,7 @@ export class ZButtonComponent implements OnDestroy, OnChanges, AfterViewInit, Af
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+
     const { nzLoading } = changes;
     if (nzLoading) {
       this.loading$.next(this.nzLoading);

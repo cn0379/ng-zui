@@ -9,6 +9,8 @@ import { ZMenuModule } from './menu'
 import { ZButtonModule  } from './button'
 import { ZDropDownModule  } from './dropdown'
 import { ZGridModule } from './grid'
+import { NzInputModule } from './input'
+import { NzTimePickerModule } from './time-picker'
 @NgModule({
   imports:[],
   exports:[
@@ -16,7 +18,9 @@ import { ZGridModule } from './grid'
     ZMenuModule,
     ZButtonModule,
     ZDropDownModule,
-    ZGridModule
+    ZGridModule,
+    NzInputModule,
+    NzTimePickerModule
   ]
 })
 

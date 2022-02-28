@@ -57,14 +57,32 @@
     <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
     <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
   </div> -->
-  <div z-row [nzGutter]="[16, 24]">
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
-    <div z-col class="gutter-row" [nzSpan]="6"><div class="bg">col-6</div></div>
+  <!-- <div z-row [nzGutter]="[16, 24]">
+    <div z-col class="gutter-row" [nzSpan]="12"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="12"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="24"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="1"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="1"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="1"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="9"><div class="bg">col-6</div></div>
+    <div z-col class="gutter-row" [nzSpan]="12"><div class="bg">col-6</div></div>
+  </div> -->
+  <div style="width: 300px;">
+    <!-- <input nz-input placeholder="large size" nzSize="large" />
+      <input nz-input placeholder="default size" nzSize="default" />
+      <input nz-input placeholder="small size" nzSize="small" />
+      <input nz-input placeholder="small size" disabled="true"/> -->
+    <!-- <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input type="text" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      6666
+    </ng-template> -->
+
+    <!-- <nz-input-group nzAddOnAfterIcon="setting">
+      <input type="text" nz-input  />
+    </nz-input-group> -->
   </div>
+  <!-- <button z-button type="primary" (click)="nzClick1()" >click me</button> -->
+  <nz-time-picker [nzDefaultOpenValue]="defaultOpenValue"></nz-time-picker>
 </z-layout>

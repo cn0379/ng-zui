@@ -67,7 +67,8 @@ export function WithConfig<T>() {
       get(): T | undefined {
         const originalValue = originalDescriptor?.get ? originalDescriptor.get.bind(this)() : this[privatePropName];
         const assignedByUser = (this.propertyAssignCounter?.[propName] || 0) > 1;
-        const configValue = this.nzConfigService.getConfigForComponent(this._nzModuleName)?.[propName];
+
+        const configValue = this.zConfigService.getConfigForComponent(this._nzModuleName)?.[propName];
         if (assignedByUser && isDefined(originalValue)) {
           return originalValue;
         } else {
@@ -90,3 +91,4 @@ export function WithConfig<T>() {
     };
   };
 }
+

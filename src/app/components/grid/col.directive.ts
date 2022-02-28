@@ -68,6 +68,7 @@ export class NzColDirective implements OnInit, OnChanges, AfterViewInit, OnDestr
       ['z-col-rtl']: this.dir === 'rtl',
       ...this.generateClass()
     };
+    console.log('this.classMap',this.classMap)
     for (const i in this.classMap) {
       if (this.classMap.hasOwnProperty(i)) {
         this.renderer.removeClass(this.elementRef.nativeElement, i);
@@ -129,6 +130,7 @@ export class NzColDirective implements OnInit, OnChanges, AfterViewInit, OnDestr
     this.dir = this.directionality.value;
     this.directionality.change.pipe(takeUntil(this.destroy$)).subscribe((direction: Direction) => {
       this.dir = direction;
+      console.log('dir')
       this.setHostClassMap();
     });
 

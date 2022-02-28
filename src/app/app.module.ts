@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FixedWidgetsModule } from './@shared/fixed-widgets/fixed-widgets.modules';
 import {  HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {  HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     ZUIModule.forRoot(),
     HttpClientModule,
-    FixedWidgetsModule
+    FixedWidgetsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

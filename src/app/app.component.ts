@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
   componentList: DocPageMeta[] = [];
   language: 'zh' | 'en' = 'zh';
   theme: any = 'default';
+  num = 0
+  time: Date | null = null;
+  defaultOpenValue = new Date(0, 0, 0, 0, 0, 0);
+  nzHourStep = 2
 
   constructor(
     private appService: AppService,
@@ -45,7 +49,8 @@ export class AppComponent implements OnInit {
   }
 
   nzClick1(){
-
+    this.num  = 9
+    this.nzHourStep = 3
   }
 
   zOpenChange() {

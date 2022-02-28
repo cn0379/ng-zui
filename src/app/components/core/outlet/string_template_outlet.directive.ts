@@ -35,7 +35,13 @@ export class ZStringTemplateOutletDirective<_T = unknown> implements OnChanges {
   private recreateView(): void {
     this.viewContainer.clear();
     const isTemplateRef = this.nzStringTemplateOutlet instanceof TemplateRef;
+    console.log('isTemplateRef',isTemplateRef);
     const templateRef = (isTemplateRef ? this.nzStringTemplateOutlet : this.templateRef) as ZSafeAny;
+    console.log('nzStringTemplateOutletContext',this.nzStringTemplateOutletContext);
+    console.log('this.context',this.context);
+    console.log('templateRef',templateRef);
+
+
     this.embeddedViewRef = this.viewContainer.createEmbeddedView(
       templateRef,
       isTemplateRef ? this.nzStringTemplateOutletContext : this.context
@@ -43,6 +49,8 @@ export class ZStringTemplateOutletDirective<_T = unknown> implements OnChanges {
   }
 
   private updateContext(): void {
+    console.log('updateContext');
+
     const isTemplateRef = this.nzStringTemplateOutlet instanceof TemplateRef;
     const newCtx = isTemplateRef ? this.nzStringTemplateOutletContext : this.context;
     const oldCtx = this.embeddedViewRef!.context as ZSafeAny;
@@ -57,12 +65,15 @@ export class ZStringTemplateOutletDirective<_T = unknown> implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const { nzStringTemplateOutletContext, nzStringTemplateOutlet } = changes;
+
     const shouldRecreateView = (): boolean => {
       let shouldOutletRecreate = false;
       if (nzStringTemplateOutlet) {
+
         if (nzStringTemplateOutlet.firstChange) {
           shouldOutletRecreate = true;
         } else {
+
           const isPreviousOutletTemplate = nzStringTemplateOutlet.previousValue instanceof TemplateRef;
           const isCurrentOutletTemplate = nzStringTemplateOutlet.currentValue instanceof TemplateRef;
           shouldOutletRecreate = isPreviousOutletTemplate || isCurrentOutletTemplate;
@@ -71,6 +82,9 @@ export class ZStringTemplateOutletDirective<_T = unknown> implements OnChanges {
       const hasContextShapeChanged = (ctxChange: SimpleChange): boolean => {
         const prevCtxKeys = Object.keys(ctxChange.previousValue || {});
         const currCtxKeys = Object.keys(ctxChange.currentValue || {});
+        console.log('prevCtxKeys',prevCtxKeys);
+        console.log('currCtxKeys',currCtxKeys);
+
         if (prevCtxKeys.length === currCtxKeys.length) {
           for (const propName of currCtxKeys) {
             if (prevCtxKeys.indexOf(propName) === -1) {
@@ -82,6 +96,7 @@ export class ZStringTemplateOutletDirective<_T = unknown> implements OnChanges {
           return true;
         }
       };
+
       const shouldContextRecreate =
         nzStringTemplateOutletContext && hasContextShapeChanged(nzStringTemplateOutletContext);
       return shouldContextRecreate || shouldOutletRecreate;
