@@ -4,8 +4,15 @@
  */
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, NgZone, OnInit, Renderer2 } from '@angular/core';
-import { ROUTE_LIST  } from './route'
+import {
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  NgZone,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import { ROUTE_LIST } from './route';
 import { AppService } from './app.service';
 
 interface DocPageMeta {
@@ -20,18 +27,18 @@ type SiteTheme = 'default' | 'dark' | 'compact' | 'aliyun';
 
 @Component({
   selector: 'app-root',
-  templateUrl:'./app.component.html',
-  styleUrls: ['./app.component.less']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.less'],
 })
 export class AppComponent implements OnInit {
   sideMenuList = ROUTE_LIST;
   componentList: DocPageMeta[] = [];
   language: 'zh' | 'en' = 'zh';
   theme: any = 'default';
-  num = 0
-  time: Date | null = null;
-  defaultOpenValue = new Date(0, 0, 0, 0, 0, 0);
-  nzHourStep = 2
+  num = 0;
+  time = new Date(0, 0, 1, 1, 1, 2);
+  defaultOpenValue = new Date(0, 0, 1, 0, 0, 0);
+  nzHourStep = 2;
 
   constructor(
     private appService: AppService,
@@ -43,19 +50,17 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sideMenuList.components.forEach(group => {
+    this.sideMenuList.components.forEach((group) => {
       this.componentList = this.componentList.concat([...group.children]);
     });
   }
 
-  nzClick1(){
-    this.num  = 9
-    this.nzHourStep = 3
+  nzClick1() {
+    this.num = 9;
+    this.nzHourStep = 3;
   }
 
-  zOpenChange() {
-
-  }
+  zOpenChange() {}
 
   onThemeChange(theme: string, notification: boolean = true): void {
     if (!this.platform.isBrowser) {
@@ -70,15 +75,16 @@ export class AppComponent implements OnInit {
       localStorage.removeItem('site-theme');
       localStorage.setItem('site-theme', theme);
       ['dark', 'compact', 'aliyun']
-        .filter(item => item !== theme)
-        .forEach(item => {
+        .filter((item) => item !== theme)
+        .forEach((item) => {
           const dom = document.getElementById(`site-theme-${item}`);
           if (dom) {
             dom.remove();
           }
         });
-      setTimeout(() => this.renderer.removeClass(this.document.activeElement, 'preload'));
-
+      setTimeout(() =>
+        this.renderer.removeClass(this.document.activeElement, 'preload')
+      );
     };
     if (theme !== 'default') {
       const style = document.createElement('link');
@@ -94,5 +100,4 @@ export class AppComponent implements OnInit {
       successLoaded();
     }
   }
-
 }

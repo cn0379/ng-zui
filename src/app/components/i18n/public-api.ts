@@ -4,3 +4,4 @@
  */
 export * from './nz-i18n.module';
 export * from './nz-i18n.service';
+export * from './date-helper.service';

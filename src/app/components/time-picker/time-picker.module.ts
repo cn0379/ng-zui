@@ -14,6 +14,7 @@ import { ZOutletModule } from '../core/outlet';
 import { ZOverlayModule } from '../core/overlay';
 import { NzTimePickerComponent } from './time-picker.component';
 import { NzTimePickerPanelComponent } from './time-picker-panel.component';
+import { NzI18nModule } from '../i18n';
 
 @NgModule({
   declarations: [NzTimePickerComponent, NzTimePickerPanelComponent],
@@ -26,6 +27,7 @@ import { NzTimePickerPanelComponent } from './time-picker-panel.component';
     ZOverlayModule,
     ZOutletModule,
     ZButtonModule,
+    NzI18nModule
   ],
 })
 export class NzTimePickerModule {}

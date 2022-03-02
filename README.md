@@ -10,12 +10,17 @@ InjectionToken
 依赖注入 似懂非懂
 
 为什么要在counstrue 中注入依赖
-Direction, Directionality Overlay 
+Direction, Directionality Overlay  已解决
 
 animations PlatformModule ngZone CDK
 
 angular 的动画
 
+angular 表单
+
+rAF 的使用
+
+变更策略
 ___________________________________________________
 指令 zmenu
 

@@ -34,6 +34,7 @@ import { slideMotion } from '../core/animation';
 import { ZConfigKey, ZConfigService, WithConfig } from '../core/config';
 import { BooleanInput, ZSafeAny } from '../core/types';
 import { InputBoolean, isNil } from '../core/util';
+import { DateHelperService } from '../i18n';
 
 const NZ_CONFIG_MODULE_NAME: ZConfigKey = 'timePicker';
 
@@ -90,7 +91,11 @@ const NZ_CONFIG_MODULE_NAME: ZConfigKey = 'timePicker';
       (detach)="close()"
       (overlayOutsideClick)="onClickOutside($event)"
     >
-      <div [@slideMotion]="'enter'" class="z-picker-dropdown" style="position: relative">
+      <div
+        [@slideMotion]="'enter'"
+        class="z-picker-dropdown"
+        style="position: relative"
+      >
         <div class="z-picker-panel-container">
           <div tabindex="-1" class="z-picker-panel">
             <nz-time-picker-panel
@@ -130,11 +135,21 @@ const NZ_CONFIG_MODULE_NAME: ZConfigKey = 'timePicker';
     '(click)': 'open()',
   },
   animations: [slideMotion],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: NzTimePickerComponent,
+      multi: true,
+    },
+  ],
 })
-export class NzTimePickerComponent {
+export class NzTimePickerComponent
+  implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy
+{
   readonly _nzModuleName: ZConfigKey = NZ_CONFIG_MODULE_NAME;
 
   static ngAcceptInputType_nzUse12Hours: BooleanInput;
+
   static ngAcceptInputType_nzHideDisabledOptions: BooleanInput;
   static ngAcceptInputType_nzAllowEmpty: BooleanInput;
   static ngAcceptInputType_nzDisabled: BooleanInput;
@@ -231,7 +246,7 @@ export class NzTimePickerComponent {
       this.preValue = isValid(value) ? new Date(value!) : null;
     }
     this.value = isValid(value) ? new Date(value!) : null;
-    // this.inputValue = this.dateHelper.format(value, this.nzFormat);
+    this.inputValue = this.dateHelper.format(value, this.nzFormat);
     this.cdr.markForCheck();
   }
 
@@ -322,13 +337,13 @@ export class NzTimePickerComponent {
   }
 
   onPanelValueChange(value: Date): void {
-    // this.setValue(value);
+    this.setValue(value);
     this.focus();
   }
 
   setCurrentValueAndClose(): void {
-    // this.emitValue(this.value);
-    // this.close();
+    this.emitValue(this.value);
+    this.close();
   }
 
   parseTimeString(str: string): void {
@@ -344,6 +359,7 @@ export class NzTimePickerComponent {
     private element: ElementRef,
     private renderer: Renderer2,
     private cdr: ChangeDetectorRef,
+    private dateHelper: DateHelperService,
     private platform: Platform,
     @Optional() private directionality: Directionality
   ) {}
@@ -351,7 +367,6 @@ export class NzTimePickerComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log('nzHourStep', this.nzHourStep);
     this.inputSize = Math.max(8, this.nzFormat.length) + 2;
     this.origin = new CdkOverlayOrigin(this.element);
 
@@ -368,11 +383,65 @@ export class NzTimePickerComponent {
     this.destroy$.complete();
   }
 
+  ngAfterViewInit(): void {
+    this.isInit = true;
+    this.updateAutoFocus();
+  }
+
+  writeValue(time: Date | null | undefined): void {
+    let result: Date | null;
+
+    if (time instanceof Date) {
+      result = time;
+    } else if (isNil(time)) {
+      result = null;
+    } else {
+      console.warn(
+        'Non-Date type is not recommended for time-picker, use "Date" type.'
+      );
+
+      result = new Date(time);
+    }
+
+    console.log('writeValue');
+    this.setValue(result, true);
+  }
+
+  registerOnChange(fn: (time: Date | null) => void): void {
+    this._onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.nzDisabled = isDisabled;
+    this.cdr.markForCheck();
+  }
+
   ngOnChanges(changes: SimpleChanges) {
-    // const { nzUse12Hours, nzFormat, nzDisabled, nzAutoFocus } = changes;
-    // if (nzUse12Hours && !nzUse12Hours.previousValue && nzUse12Hours.currentValue && !nzFormat) {
-    //   this.nzFormat = 'h:mm:ss a';
-    // }
+    const { nzUse12Hours, nzFormat, nzDisabled, nzAutoFocus } = changes;
+    if (
+      nzUse12Hours &&
+      !nzUse12Hours.previousValue &&
+      nzUse12Hours.currentValue &&
+      !nzFormat
+    ) {
+      this.nzFormat = 'h:mm:ss a';
+    }
+    if (nzDisabled) {
+      const value = nzDisabled.currentValue;
+      const input = this.inputRef.nativeElement as HTMLInputElement;
+      if (value) {
+        this.renderer.setAttribute(input, 'disabled', '');
+      } else {
+        this.renderer.removeAttribute(input, 'disabled');
+      }
+    }
+    if (nzAutoFocus) {
+      this.updateAutoFocus();
+    }
   }
 
   private checkTimeValid(value: Date | null): boolean {
