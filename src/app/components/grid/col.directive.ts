@@ -134,7 +134,7 @@ export class NzColDirective implements OnInit, OnChanges, AfterViewInit, OnDestr
       this.setHostClassMap();
     });
 
-    this.setHostClassMap();
+    // this.setHostClassMap();
     this.setHostFlexStyle();
   }
 
