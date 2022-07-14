@@ -11,6 +11,8 @@ import { ZDropDownModule } from './dropdown';
 import { ZGridModule } from './grid';
 import { NzInputModule } from './input';
 import { NzTimePickerModule } from './time-picker';
+import { NzSelectModule } from './select/slelet.module';
+
 @NgModule({
   imports: [],
   exports: [
@@ -21,6 +23,7 @@ import { NzTimePickerModule } from './time-picker';
     ZGridModule,
     NzInputModule,
     NzTimePickerModule,
+    NzSelectModule
   ],
 })
 export class ZUIModule {

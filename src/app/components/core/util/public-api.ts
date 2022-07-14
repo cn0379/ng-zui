@@ -5,4 +5,5 @@
 export * from './tick'
 export * from './convert'
 export * from './check'
+export * from './status-util'
 
