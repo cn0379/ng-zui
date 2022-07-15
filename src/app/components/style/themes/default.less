@@ -4,7 +4,8 @@
 @theme: default;
 
 // The prefix to use on all css classes from ant.
-@z-prefix: z;
+@z-prefix: ant;
+// @ant-prefix: ant;
 
 // An override for the html selector for theme prefixes
 @html-selector: html;
@@ -61,9 +62,7 @@
 @primary-2: color(~`colorPalette('@{primary-color}', 2) `); // replace tint(@primary-color, 80%)
 @primary-3: color(~`colorPalette('@{primary-color}', 3) `); // unused
 @primary-4: color(~`colorPalette('@{primary-color}', 4) `); // unused
-@primary-5: color(
-  ~`colorPalette('@{primary-color}', 5) `
-); // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
+@primary-5: color(~`colorPalette('@{primary-color}', 5) `); // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
 @primary-6: @primary-color; // color used to control the text color of active buttons, don't use, use @primary-color
 @primary-7: color(~`colorPalette('@{primary-color}', 7) `); // replace shade(@primary-color, 5%)
 @primary-8: color(~`colorPalette('@{primary-color}', 8) `); // unused
@@ -423,19 +422,11 @@
 @input-padding-horizontal-base: @input-padding-horizontal;
 @input-padding-horizontal-sm: @control-padding-horizontal-sm - 1px;
 @input-padding-horizontal-lg: @input-padding-horizontal;
-@input-padding-vertical-base: max(
-  (round(((@input-height-base - @font-size-base * @line-height-base) / 2) * 10) / 10) -
-    @border-width-base,
-  3px
-);
-@input-padding-vertical-sm: max(
-  (round(((@input-height-sm - @font-size-base * @line-height-base) / 2) * 10) / 10) -
-    @border-width-base,
-  0
-);
-@input-padding-vertical-lg: (
-    ceil(((@input-height-lg - @font-size-lg * @line-height-base) / 2) * 10) / 10
-  ) - @border-width-base;
+@input-padding-vertical-base: max((round(((@input-height-base - @font-size-base * @line-height-base) / 2) * 10) / 10) - @border-width-base,
+    3px);
+@input-padding-vertical-sm: max((round(((@input-height-sm - @font-size-base * @line-height-base) / 2) * 10) / 10) - @border-width-base,
+    0);
+@input-padding-vertical-lg: (ceil(((@input-height-lg - @font-size-lg * @line-height-base) / 2) * 10) / 10) - @border-width-base;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
 @input-icon-color: @input-color;
@@ -765,9 +756,7 @@
 @tabs-card-head-background: @background-color-light;
 @tabs-card-height: 40px;
 @tabs-card-active-color: @primary-color;
-@tabs-card-horizontal-padding: (
-    (@tabs-card-height - floor(@font-size-base * @line-height-base)) / 2
-  ) - @border-width-base @padding-md;
+@tabs-card-horizontal-padding: ((@tabs-card-height - floor(@font-size-base * @line-height-base)) / 2) - @border-width-base @padding-md;
 @tabs-card-horizontal-padding-sm: 6px @padding-md;
 @tabs-card-horizontal-padding-lg: 7px @padding-md 6px;
 @tabs-title-font-size: @font-size-base;
@@ -955,8 +944,7 @@
 @alert-no-icon-padding-vertical: @padding-xs;
 @alert-with-description-no-icon-padding-vertical: @padding-md - 1px;
 @alert-with-description-padding-vertical: @padding-md - 1px;
-@alert-with-description-padding: @alert-with-description-padding-vertical 15px
-  @alert-with-description-no-icon-padding-vertical @alert-with-description-icon-size;
+@alert-with-description-padding: @alert-with-description-padding-vertical 15px @alert-with-description-no-icon-padding-vertical @alert-with-description-icon-size;
 @alert-icon-top: 8px + @font-size-base * (@line-height-base / 2) - (@font-size-base / 2);
 @alert-with-description-icon-size: 24px;
 

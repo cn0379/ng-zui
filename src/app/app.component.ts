@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   time = new Date(0, 0, 1, 1, 1, 2);
   defaultOpenValue = new Date(0, 0, 1, 0, 0, 0);
   nzHourStep = 2;
-
+  selectedOS = null;  
   constructor(
     private appService: AppService,
     private platform: Platform,
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     // tslint:disable-next-line:no-any
     @Inject(DOCUMENT) private document: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sideMenuList.components.forEach((group) => {
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
     this.nzHourStep = 3;
   }
 
-  zOpenChange() {}
+  zOpenChange() { }
 
   onThemeChange(theme: string, notification: boolean = true): void {
     if (!this.platform.isBrowser) {
