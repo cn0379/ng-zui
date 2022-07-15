@@ -252,7 +252,7 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
     @ContentChildren(NzOptionGroupComponent, { descendants: true })
     listOfNzOptionGroupComponent!: QueryList<NzOptionGroupComponent>;
     @ViewChild(NzOptionGroupComponent, { static: true, read: ElementRef }) nzOptionGroupComponentElement!: ElementRef;
-    @ViewChild(NzSelectTopControlComponent, { static: true, read: ElementRef })
+    // @ViewChild(NzSelectTopControlComponent, { static: true, read: ElementRef })
     nzSelectTopControlComponentElement!: ElementRef;
     private listOfValue$ = new BehaviorSubject<ZSafeAny[]>([]);
     private listOfTemplateItem$ = new BehaviorSubject<NzSelectItemInterface[]>([]);
@@ -530,7 +530,7 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
     constructor(
         private ngZone: NgZone,
         private destroy$: ZDestroyService,
-        public ZConfigService: ZConfigService,
+        public zConfigService: ZConfigService,
         private cdr: ChangeDetectorRef,
         private host: ElementRef<HTMLElement>,
         private renderer: Renderer2,
@@ -664,7 +664,7 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
             this.cdr.detectChanges();
         });
 
-        this.ZConfigService
+        this.zConfigService
             .getConfigChangeEventForComponent('select')
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {

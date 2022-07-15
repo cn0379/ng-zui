@@ -84,13 +84,13 @@ export class ZDropDownDirective implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   constructor(
-    public readonly nzConfigService: ZConfigService,
+    public readonly zConfigService: ZConfigService,
     public elementRef: ElementRef,
     private overlay: Overlay,
     private renderer: Renderer2,
     private viewContainerRef: ViewContainerRef,
     private platform: Platform
-  ) {}
+  ) { }
 
   ngAfterViewInit(): void {
     if (this.zDropdownMenu) {

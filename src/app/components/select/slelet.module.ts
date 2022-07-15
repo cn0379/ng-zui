@@ -19,18 +19,18 @@ import { ɵZTransitionPatchModule as NzTransitionPatchModule } from '../core/tra
 //  import { NzEmptyModule } from 'ng-zorro-antd/empty';
 //  import { NzI18nModule } from 'ng-zorro-antd/i18n';
 //  import { NzIconModule } from 'ng-zorro-antd/icon';
-
-// import { NzOptionContainerComponent } from './option-container.component';
-//  import { NzOptionGroupComponent } from './option-group.component';
-//  import { NzOptionItemGroupComponent } from './option-item-group.component';
-//  import { NzOptionItemComponent } from './option-item.component';
-//  import { NzOptionComponent } from './option.component';
-//  import { NzSelectArrowComponent } from './select-arrow.component';
-//  import { NzSelectClearComponent } from './select-clear.component';
-//  import { NzSelectItemComponent } from './select-item.component';
-//  import { NzSelectPlaceholderComponent } from './select-placeholder.component';
-//  import { NzSelectSearchComponent } from './select-search.component';
-//  import { NzSelectTopControlComponent } from './select-top-control.component';
+import { NzFormPatchModule } from '../core/form';
+import { NzOptionContainerComponent } from './option-container.component';
+import { NzOptionGroupComponent } from './option-group.component';
+import { NzOptionItemGroupComponent } from './option-item-group.component';
+import { NzOptionItemComponent } from './option-item.component';
+import { NzOptionComponent } from './option.component';
+import { NzSelectArrowComponent } from './select-arrow.component';
+import { NzSelectClearComponent } from './select-clear.component';
+import { NzSelectItemComponent } from './select-item.component';
+import { NzSelectPlaceholderComponent } from './select-placeholder.component';
+import { NzSelectSearchComponent } from './select-search.component';
+import { NzSelectTopControlComponent } from './select-top-control.component';
 import { NzSelectComponent } from './select.component';
 
 @NgModule({
@@ -48,31 +48,32 @@ import { NzSelectComponent } from './select.component';
     ZNoAnimationModule,
     NzTransitionPatchModule,
     ScrollingModule,
-    A11yModule
+    A11yModule,
+    NzFormPatchModule
   ],
   declarations: [
-    //  NzOptionComponent,
     NzSelectComponent,
-    //  NzOptionContainerComponent,
-    //  NzOptionGroupComponent,
-    //  NzOptionItemComponent,
-    //  NzSelectTopControlComponent,
-    //  NzSelectSearchComponent,
-    //  NzSelectItemComponent,
-    //  NzSelectClearComponent,
-    //  NzSelectArrowComponent,
-    //  NzSelectPlaceholderComponent,
-    //  NzOptionItemGroupComponent
+    NzOptionComponent,
+    NzOptionGroupComponent,
+    NzOptionContainerComponent,
+    NzOptionItemComponent,
+    NzSelectTopControlComponent,
+    NzSelectSearchComponent,
+    NzSelectItemComponent,
+    NzSelectClearComponent,
+    NzSelectArrowComponent,
+    NzSelectPlaceholderComponent,
+    NzOptionItemGroupComponent
   ],
   exports: [
-    //  NzOptionComponent,
+    NzOptionComponent,
     NzSelectComponent,
-    //  NzOptionGroupComponent,
-    //  NzSelectArrowComponent,
-    //  NzSelectClearComponent,
-    //  NzSelectItemComponent,
-    //  NzSelectPlaceholderComponent,
-    //  NzSelectSearchComponent
+    NzOptionGroupComponent,
+    NzSelectArrowComponent,
+    NzSelectClearComponent,
+    NzSelectItemComponent,
+    NzSelectPlaceholderComponent,
+    NzSelectSearchComponent,
   ]
 })
 export class NzSelectModule { }

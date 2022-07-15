@@ -36,6 +36,7 @@ export class ZConfigService {
   }
 
   getConfigChangeEventForComponent(componentName: ZConfigKey): Observable<void> {
+
     return this.configUpdated$.pipe(
       filter(n => n === componentName),
       mapTo(undefined)
@@ -67,6 +68,7 @@ export function WithConfig<T>() {
       get(): T | undefined {
         const originalValue = originalDescriptor?.get ? originalDescriptor.get.bind(this)() : this[privatePropName];
         const assignedByUser = (this.propertyAssignCounter?.[propName] || 0) > 1;
+        console.log('assignedByUser', this.zConfigService);
 
         const configValue = this.zConfigService.getConfigForComponent(this._nzModuleName)?.[propName];
         if (assignedByUser && isDefined(originalValue)) {

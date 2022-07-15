@@ -6,13 +6,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { NzFormItemFeedbackIconComponent } from './nz-form-item-feedback-icon.component';
 
 @NgModule({
-  imports: [CommonModule, NzIconModule],
+  imports: [CommonModule],
   exports: [NzFormItemFeedbackIconComponent],
   declarations: [NzFormItemFeedbackIconComponent]
 })
-export class NzFormPatchModule {}
+export class NzFormPatchModule { }

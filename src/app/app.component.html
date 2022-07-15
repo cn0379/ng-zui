@@ -84,5 +84,11 @@
     </nz-input-group> -->
   </div>
   <!-- <button z-button type="primary" (click)="nzClick1()" >click me</button> -->
-  <nz-time-picker [(ngModel)]="time" [nzDefaultOpenValue]="defaultOpenValue"></nz-time-picker>
+  <!-- <nz-time-picker [(ngModel)]="time" [nzDefaultOpenValue]="defaultOpenValue"></nz-time-picker> -->
+  <nz-select ngModel="lucy">
+    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+    <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+  </nz-select>
+
 </z-layout>

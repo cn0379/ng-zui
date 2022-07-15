@@ -3,35 +3,34 @@
  * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
  */
 
- import { TemplateRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 
- import { NzSafeAny } from 'ng-zorro-antd/core/types';
- 
- export type NzSelectModeType = 'default' | 'multiple' | 'tags';
- export interface NzSelectItemInterface {
-   template?: TemplateRef<NzSafeAny> | null;
-   nzLabel: string | number | null;
-   nzValue: NzSafeAny | null;
-   nzDisabled?: boolean;
-   nzHide?: boolean;
-   nzCustomContent?: boolean;
-   groupLabel?: string | number | TemplateRef<NzSafeAny> | null;
-   type?: string;
-   key?: NzSafeAny;
- }
- 
- export interface NzSelectOptionInterface {
-   label: string | number | null | TemplateRef<NzSafeAny>;
-   value: NzSafeAny | null;
-   disabled?: boolean;
-   hide?: boolean;
-   groupLabel?: string | number | TemplateRef<NzSafeAny> | null;
- }
- 
- export type NzSelectTopControlItemType = Partial<NzSelectItemInterface> & {
-   contentTemplateOutlet: TemplateRef<NzSafeAny> | null;
-   contentTemplateOutletContext: NzSafeAny;
- };
- 
- export type NzFilterOptionType = (input: string, option: NzSelectItemInterface) => boolean;
- 
+import { ZSafeAny } from '../core/types';
+
+export type NzSelectModeType = 'default' | 'multiple' | 'tags';
+export interface NzSelectItemInterface {
+  template?: TemplateRef<ZSafeAny> | null;
+  nzLabel: string | number | null;
+  nzValue: ZSafeAny | null;
+  nzDisabled?: boolean;
+  nzHide?: boolean;
+  nzCustomContent?: boolean;
+  groupLabel?: string | number | TemplateRef<ZSafeAny> | null;
+  type?: string;
+  key?: ZSafeAny;
+}
+
+export interface NzSelectOptionInterface {
+  label: string | number | null | TemplateRef<ZSafeAny>;
+  value: ZSafeAny | null;
+  disabled?: boolean;
+  hide?: boolean;
+  groupLabel?: string | number | TemplateRef<ZSafeAny> | null;
+}
+
+export type NzSelectTopControlItemType = Partial<NzSelectItemInterface> & {
+  contentTemplateOutlet: TemplateRef<ZSafeAny> | null;
+  contentTemplateOutletContext: ZSafeAny;
+};
+
+export type NzFilterOptionType = (input: string, option: NzSelectItemInterface) => boolean;
