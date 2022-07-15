@@ -12,6 +12,7 @@ export interface ZConfig {
   dropDown?: DropDownConfig;
   button?: ButtonConfig;
   timePicker?: TimePickerConfig;
+  select?: SelectConfig;
 }
 
 export interface ButtonConfig {
@@ -29,6 +30,12 @@ export interface DropDownConfig {
 
 export interface PopoverConfig {
   zPopoverBackdrop?: boolean;
+}
+
+export interface SelectConfig {
+  nzBorderless?: boolean;
+  nzSuffixIcon?: TemplateRef<ZSafeAny> | string | null;
+  nzBackdrop?: boolean;
 }
 
 export interface TimePickerConfig {

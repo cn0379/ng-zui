@@ -1,0 +1,42 @@
+/**
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
+ */
+
+import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+
+import { ZSafeAny } from '../core/types';
+
+@Component({
+    selector: 'nz-select-arrow',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
+     <i nz-icon nzType="loading" *ngIf="loading; else defaultArrow"></i>
+     <ng-template #defaultArrow>
+       <ng-container *ngIf="showArrow && !suffixIcon; else suffixTemplate">
+         <i nz-icon nzType="down" *ngIf="!search"></i>
+         <i nz-icon nzType="search" *ngIf="search"></i>
+       </ng-container>
+       <ng-template #suffixTemplate>
+         <ng-container *nzStringTemplateOutlet="suffixIcon; let suffixIcon">
+           <i *ngIf="suffixIcon" nz-icon [nzType]="suffixIcon"></i>
+         </ng-container>
+       </ng-template>
+     </ng-template>
+     <ng-container *nzStringTemplateOutlet="feedbackIcon">{{ feedbackIcon }}</ng-container>
+   `,
+    host: {
+        class: 'ant-select-arrow',
+        '[class.ant-select-arrow-loading]': 'loading'
+    }
+})
+export class NzSelectArrowComponent {
+    @Input() loading = false;
+    @Input() search = false;
+    @Input() showArrow = false;
+    @Input() suffixIcon: TemplateRef<ZSafeAny> | string | null = null;
+    @Input() feedbackIcon: TemplateRef<ZSafeAny> | string | null = null;
+
+    constructor() { }
+}

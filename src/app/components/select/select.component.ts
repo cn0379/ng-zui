@@ -66,7 +66,7 @@ const defaultFilterOption: NzFilterOptionType = (searchValue: string, item: NzSe
     }
 };
 
-const NZ_CONFIG_MODULE_NAME: NzConfigKey = 'select';
+const NZ_CONFIG_MODULE_NAME: ZConfigKey = 'select';
 
 export type NzSelectSizeType = 'large' | 'default' | 'small';
 
@@ -75,7 +75,7 @@ export type NzSelectSizeType = 'large' | 'default' | 'small';
     exportAs: 'nzSelect',
     preserveWhitespaces: false,
     providers: [
-        NzDestroyService,
+        ZDestroyService,
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => NzSelectComponent),
@@ -183,7 +183,7 @@ export type NzSelectSizeType = 'large' | 'default' | 'small';
     }
 })
 export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterContentInit, OnChanges, OnDestroy {
-    readonly _nzModuleName: NzConfigKey = NZ_CONFIG_MODULE_NAME;
+    readonly _nzModuleName: ZConfigKey = NZ_CONFIG_MODULE_NAME;
 
     static ngAcceptInputType_nzAllowClear: BooleanInput;
     static ngAcceptInputType_nzBorderless: BooleanInput;
@@ -203,23 +203,23 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
     @Input() nzDropdownClassName: string | null = null;
     @Input() nzDropdownMatchSelectWidth = true;
     @Input() nzDropdownStyle: { [key: string]: string } | null = null;
-    @Input() nzNotFoundContent: string | TemplateRef<NzSafeAny> | undefined = undefined;
-    @Input() nzPlaceHolder: string | TemplateRef<NzSafeAny> | null = null;
+    @Input() nzNotFoundContent: string | TemplateRef<ZSafeAny> | undefined = undefined;
+    @Input() nzPlaceHolder: string | TemplateRef<ZSafeAny> | null = null;
     @Input() nzMaxTagCount = Infinity;
-    @Input() nzDropdownRender: TemplateRef<NzSafeAny> | null = null;
+    @Input() nzDropdownRender: TemplateRef<ZSafeAny> | null = null;
     @Input() nzCustomTemplate: TemplateRef<{ $implicit: NzSelectItemInterface }> | null = null;
     @Input()
-    @WithConfig<TemplateRef<NzSafeAny> | string | null>()
-    nzSuffixIcon: TemplateRef<NzSafeAny> | string | null = null;
-    @Input() nzClearIcon: TemplateRef<NzSafeAny> | null = null;
-    @Input() nzRemoveIcon: TemplateRef<NzSafeAny> | null = null;
-    @Input() nzMenuItemSelectedIcon: TemplateRef<NzSafeAny> | null = null;
+    @WithConfig<TemplateRef<ZSafeAny> | string | null>()
+    nzSuffixIcon: TemplateRef<ZSafeAny> | string | null = null;
+    @Input() nzClearIcon: TemplateRef<ZSafeAny> | null = null;
+    @Input() nzRemoveIcon: TemplateRef<ZSafeAny> | null = null;
+    @Input() nzMenuItemSelectedIcon: TemplateRef<ZSafeAny> | null = null;
     @Input() nzTokenSeparators: string[] = [];
-    @Input() nzMaxTagPlaceholder: TemplateRef<{ $implicit: NzSafeAny[] }> | null = null;
+    @Input() nzMaxTagPlaceholder: TemplateRef<{ $implicit: ZSafeAny[] }> | null = null;
     @Input() nzMaxMultipleCount = Infinity;
     @Input() nzMode: NzSelectModeType = 'default';
     @Input() nzFilterOption: NzFilterOptionType = defaultFilterOption;
-    @Input() compareWith: (o1: NzSafeAny, o2: NzSafeAny) => boolean = (o1: NzSafeAny, o2: NzSafeAny) => o1 === o2;
+    @Input() compareWith: (o1: ZSafeAny, o2: ZSafeAny) => boolean = (o1: ZSafeAny, o2: ZSafeAny) => o1 === o2;
     @Input() @InputBoolean() nzAllowClear = false;
     @Input() @WithConfig<boolean>() @InputBoolean() nzBorderless = false;
     @Input() @InputBoolean() nzShowSearch = false;
@@ -254,12 +254,12 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
     @ViewChild(NzOptionGroupComponent, { static: true, read: ElementRef }) nzOptionGroupComponentElement!: ElementRef;
     @ViewChild(NzSelectTopControlComponent, { static: true, read: ElementRef })
     nzSelectTopControlComponentElement!: ElementRef;
-    private listOfValue$ = new BehaviorSubject<NzSafeAny[]>([]);
+    private listOfValue$ = new BehaviorSubject<ZSafeAny[]>([]);
     private listOfTemplateItem$ = new BehaviorSubject<NzSelectItemInterface[]>([]);
     private listOfTagAndTemplateItem: NzSelectItemInterface[] = [];
     private searchValue: string = '';
     private isReactiveDriven = false;
-    private value: NzSafeAny | NzSafeAny[];
+    private value: ZSafeAny | ZSafeAny[];
     private _nzShowArrow: boolean | undefined;
     private requestId: number = -1;
     onChange: OnChangeType = () => { };
@@ -268,8 +268,8 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
     triggerWidth: number | null = null;
     listOfContainerItem: NzSelectItemInterface[] = [];
     listOfTopItem: NzSelectItemInterface[] = [];
-    activatedValue: NzSafeAny | null = null;
-    listOfValue: NzSafeAny[] = [];
+    activatedValue: ZSafeAny | null = null;
+    listOfValue: ZSafeAny[] = [];
     focused = false;
     dir: Direction = 'ltr';
 
@@ -287,7 +287,7 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
         };
     }
 
-    onItemClick(value: NzSafeAny): void {
+    onItemClick(value: ZSafeAny): void {
         this.activatedValue = value;
         if (this.nzMode === 'default') {
             if (this.listOfValue.length === 0 || !this.compareWith(this.listOfValue[0], value)) {
@@ -341,7 +341,7 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
             listOfContainerItem.find(item => this.compareWith(item.nzValue, this.listOfValue[0])) ||
             listOfContainerItem[0];
         this.activatedValue = (activatedItem && activatedItem.nzValue) || null;
-        let listOfGroupLabel: Array<string | number | TemplateRef<NzSafeAny> | null> = [];
+        let listOfGroupLabel: Array<string | number | TemplateRef<ZSafeAny> | null> = [];
         if (this.isReactiveDriven) {
             listOfGroupLabel = [...new Set(this.nzOptions.filter(o => o.groupLabel).map(o => o.groupLabel!))];
         } else {
@@ -365,8 +365,8 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
         this.nzSelectTopControlComponent.clearInputValue();
     }
 
-    updateListOfValue(listOfValue: NzSafeAny[]): void {
-        const covertListToModel = (list: NzSafeAny[], mode: NzSelectModeType): NzSafeAny[] | NzSafeAny => {
+    updateListOfValue(listOfValue: ZSafeAny[]): void {
+        const covertListToModel = (list: ZSafeAny[], mode: NzSelectModeType): ZSafeAny[] | ZSafeAny => {
             if (mode === 'default') {
                 if (list.length > 0) {
                     return list[0];
@@ -529,24 +529,24 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
 
     constructor(
         private ngZone: NgZone,
-        private destroy$: NzDestroyService,
-        public nzConfigService: NzConfigService,
+        private destroy$: ZDestroyService,
+        public ZConfigService: ZConfigService,
         private cdr: ChangeDetectorRef,
         private host: ElementRef<HTMLElement>,
         private renderer: Renderer2,
         private platform: Platform,
         private focusMonitor: FocusMonitor,
         @Optional() private directionality: Directionality,
-        @Host() @Optional() public noAnimation?: NzNoAnimationDirective,
+        @Host() @Optional() public noAnimation?: ZNoAnimationDirective,
         @Optional() public nzFormStatusService?: NzFormStatusService,
         @Optional() private nzFormNoStatusService?: NzFormNoStatusService
     ) { }
 
-    writeValue(modelValue: NzSafeAny | NzSafeAny[]): void {
+    writeValue(modelValue: ZSafeAny | ZSafeAny[]): void {
         /** https://github.com/angular/angular/issues/14988 **/
         if (this.value !== modelValue) {
             this.value = modelValue;
-            const covertModelToList = (model: NzSafeAny[] | NzSafeAny, mode: NzSelectModeType): NzSafeAny[] => {
+            const covertModelToList = (model: ZSafeAny[] | ZSafeAny, mode: NzSelectModeType): ZSafeAny[] => {
                 if (model === null || model === undefined) {
                     return [];
                 } else if (mode === 'default') {
@@ -664,7 +664,7 @@ export class NzSelectComponent implements ControlValueAccessor, OnInit, AfterCon
             this.cdr.detectChanges();
         });
 
-        this.nzConfigService
+        this.ZConfigService
             .getConfigChangeEventForComponent('select')
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
