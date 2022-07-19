@@ -228,6 +228,8 @@ export class NzSelectTopControlComponent implements OnChanges, OnInit, OnDestroy
     }
 
     ngOnInit(): void {
+        console.log('mode', this.mode)
+
         this.ngZone.runOutsideAngular(() => {
             fromEvent<MouseEvent>(this.elementRef.nativeElement, 'click')
                 .pipe(takeUntil(this.destroy$))

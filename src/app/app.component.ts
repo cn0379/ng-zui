@@ -2,6 +2,7 @@
  * @Author: zhangshaolong
  * @Date: 2021-12-25 10:14:13
  */
+/* eslint-disable */
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -14,6 +15,9 @@ import {
 } from '@angular/core';
 import { ROUTE_LIST } from './route';
 import { AppService } from './app.service';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, debounceTime, switchMap } from 'rxjs/operators';
 
 interface DocPageMeta {
   path: string;
@@ -31,73 +35,36 @@ type SiteTheme = 'default' | 'dark' | 'compact' | 'aliyun';
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent implements OnInit {
-  sideMenuList = ROUTE_LIST;
-  componentList: DocPageMeta[] = [];
-  language: 'zh' | 'en' = 'zh';
-  theme: any = 'default';
-  num = 0;
-  time = new Date(0, 0, 1, 1, 1, 2);
-  defaultOpenValue = new Date(0, 0, 1, 0, 0, 0);
-  nzHourStep = 2;
-  selectedOS = null;  
-  constructor(
-    private appService: AppService,
-    private platform: Platform,
-    private renderer: Renderer2,
-    private cdr: ChangeDetectorRef,
-    // tslint:disable-next-line:no-any
-    @Inject(DOCUMENT) private document: any
-  ) { }
+  randomUserUrl = 'https://api.randomuser.me/?results=5';
+  searchChange$ = new BehaviorSubject('');
+  optionList: string[] = [];
+  selectedUser?: string;
+  isLoading = false;
+
+  onSearch(value: string): void {
+    this.isLoading = true;
+    this.searchChange$.next(value);
+  }
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.sideMenuList.components.forEach((group) => {
-      this.componentList = this.componentList.concat([...group.children]);
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const getRandomNameList = (name: string): Observable<any> =>
+      this.http
+        .get(`${this.randomUserUrl}`)
+        .pipe(
+          catchError(() => of({ results: [] })),
+          map((res: any) => res.results)
+        )
+        .pipe(map((list: any) => list.map((item: any) => `${item.name.first} ${name}`)));
+    const optionList$: Observable<string[]> = this.searchChange$
+      .asObservable()
+      .pipe(debounceTime(500))
+      .pipe(switchMap(getRandomNameList));
+    optionList$.subscribe(data => {
+      this.optionList = data;
+      this.isLoading = false;
     });
-  }
-
-  nzClick1() {
-    this.num = 9;
-    this.nzHourStep = 3;
-  }
-
-  zOpenChange() { }
-
-  onThemeChange(theme: string, notification: boolean = true): void {
-    if (!this.platform.isBrowser) {
-      return;
-    }
-
-    this.renderer.addClass(this.document.activeElement, 'preload');
-    const successLoaded = () => {
-      this.theme = theme as SiteTheme;
-      this.appService.theme$.next(theme);
-      this.renderer.setAttribute(document.body, 'data-theme', theme);
-      localStorage.removeItem('site-theme');
-      localStorage.setItem('site-theme', theme);
-      ['dark', 'compact', 'aliyun']
-        .filter((item) => item !== theme)
-        .forEach((item) => {
-          const dom = document.getElementById(`site-theme-${item}`);
-          if (dom) {
-            dom.remove();
-          }
-        });
-      setTimeout(() =>
-        this.renderer.removeClass(this.document.activeElement, 'preload')
-      );
-    };
-    if (theme !== 'default') {
-      const style = document.createElement('link');
-      style.type = 'text/css';
-      style.rel = 'stylesheet';
-      style.id = `site-theme-${theme}`;
-      style.href = `assets/${theme}.css`;
-      style.onload = () => {
-        successLoaded();
-      };
-      document.body.append(style);
-    } else {
-      successLoaded();
-    }
   }
 }

@@ -85,16 +85,15 @@
   </div>
   <!-- <button z-button type="primary" (click)="nzClick1()" >click me</button> -->
   <!-- <nz-time-picker [(ngModel)]="time" [nzDefaultOpenValue]="defaultOpenValue"></nz-time-picker> -->
-  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select OS" [(ngModel)]="selectedOS">
-    <nz-option nzCustomContent nzLabel="Windows" nzValue="windows">
-      WindowssssssssssssssssssssssssssssssssssssssssssS
-    </nz-option>
-    <nz-option nzCustomContent nzLabel="Mac" nzValue="mac">
-      Mac
-    </nz-option>
-    <nz-option nzCustomContent nzLabel="Android" nzValue="android">
-      Android
+
+  <nz-select nzMode="multiple" nzPlaceHolder="Select users" nzAllowClear nzShowSearch nzServerSearch
+    [(ngModel)]="selectedUser" (nzOnSearch)="onSearch($event)">
+    <ng-container *ngFor="let o of optionList">
+      <nz-option *ngIf="!isLoading" [nzValue]="o" [nzLabel]="o"></nz-option>
+    </ng-container>
+    <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+      <i nz-icon nzType="loading" class="loading-icon"></i>
+      Loading Data...
     </nz-option>
   </nz-select>
-
 </z-layout>
